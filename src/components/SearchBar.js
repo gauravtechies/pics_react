@@ -1,17 +1,41 @@
 import React from 'react';
 
 class SearchBar extends React.Component{
-    constructor(props){
-            super(props);
-        this.onFormSubmit.bind(this);
-    }
+
+     /*
+     //This is first way to resolve problem with binding
+        onFormSubmit=this.onFormSubmit.bind(this);
+        onFormSubmit(event){
+            event.preventDefault();
+            console.log(this.state.term)
+        }
+        onSubmit={this.onFormSubmit}
+    
+    //This is second way, easy and more prefered way   to resolve problem with this we use 
+         error function of 2015 in that binding is inbuilt
+         onFormSubmit=(event)=>{
+            event.preventDefault();
+            console.log(this.state.term)
+        }
+        //Calling way 
+        onSubmit={this.onFormSubmit}
+
+    //This is third way from which we call directly from calling instance
+        onFormSubmit=(event)=>{
+                event.preventDefault();
+                console.log(this.state.term)
+            }
+        
+        onSubmit={(e)=>this.onFormSubmit(e)}
+     */
+
     state ={term:'HI there'}
     onInputChange(event){
         console.log(event.target.value)
     }
-    onFormSubmit(event){
+    onFormSubmit=(event)=>{
         event.preventDefault();
-        console.log(this.state.term)
+        this.props.onSearchFormSubmit(this.state.term)
     }
 
     render(){
