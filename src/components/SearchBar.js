@@ -1,6 +1,7 @@
 import React from 'react';
 
 class SearchBar extends React.Component{
+  
 
      /*
      //This is first way to resolve problem with binding
@@ -33,10 +34,35 @@ class SearchBar extends React.Component{
     onInputChange(event){
         console.log(event.target.value)
     }
+    onFormSubmit= (e)=>{
+        
+      //This will come undefined because this is similar to :- *1*
+        e.preventDefault(); 
+        
+        this.props.onSearchFormSubmit(this.state.term)   
+      
+    }
+/*  *1*
+class Car{
+    setDriverSound(sound){
+        this.sound=sound;
+    }
+    drive(){
+        return this.sound
     onFormSubmit=(event)=>{
         event.preventDefault();
         this.props.onSearchFormSubmit(this.state.term)
     }
+}
+
+const car= new Car();
+const drive=car.drive;    //car.drivr is reference to function not returned value and Now drive is a function 
+drive();  //now this will result in  "this is undefined" because dive have nothing like this 
+//we have to see on left from calling to know what will be the value of this will come 
+//In handlers also it come undefined because  onSubmit={this.onFormSubmit} we are putting function into onFormSubmit and 
+//this is undefined in onform submit 
+
+*/
 
     render(){
         return (
